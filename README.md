@@ -26,7 +26,7 @@ pip install taichi
 ## 使用
 下载本项目文件，进入项目根目录（即包含`src\`、`README.md`的目录）。
 
-然后在安装了`Taichi`的命令行环境中执行命令：
+在安装了`Taichi`的命令行环境中执行命令：
 
 ```
 python .\src\main.py
