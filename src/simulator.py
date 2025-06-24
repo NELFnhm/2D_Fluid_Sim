@@ -377,20 +377,23 @@ class Simulator(object):
         # Index on sides
         idx_side = [base-1, base, base+1, base+2]
         # Weight on sides
-        w_side = [self.quadratic_kernel(1.0+frac), self.quadratic_kernel(frac), self.quadratic_kernel(1.0-frac), self.quadratic_kernel(2.0-frac)]
+        w_side = [
+            self.quadratic_kernel(1.0+frac), 
+            self.quadratic_kernel(frac), 
+            self.quadratic_kernel(1.0-frac), 
+            self.quadratic_kernel(2.0-frac)
+        ]
         # Index on centers
         idx_center = [base-1, base, base+1]
         # Weight on centers
-        w_center = [self.quadratic_kernel(0.5+frac), self.quadratic_kernel(ti.abs(0.5-frac)), self.quadratic_kernel(1.5-frac)]
+        w_center = [
+            self.quadratic_kernel(0.5+frac), 
+            self.quadratic_kernel(ti.abs(0.5-frac)), 
+            self.quadratic_kernel(1.5-frac)
+        ]
 
-        wx = 0.0
-        wy = 0.0
-
-        vx = 0.0
-        vy = 0.0
-
-        C_x = ti.Matrix.zero(ti.f32, 2)
-        C_y = ti.Matrix.zero(ti.f32, 2)
+        wx, wy, vx, vy = 0.0, 0.0, 0.0, 0.0
+        C_x, C_y = ti.Matrix.zero(ti.f32, 2), ti.Matrix.zero(ti.f32, 2)
 
         for i in ti.static(range(4)):
             for j in ti.static(range(3)):
