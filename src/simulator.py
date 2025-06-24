@@ -6,10 +6,10 @@ global_params = {
     'dt' : 0.01,                                # Time step
     'g' : (0.0, -9.8),                          # Body force
     'rho': 1000.0,                              # Density of the fluid
-    'grid_size' : (128, 128),                     # Grid size (integer)
+    'grid_size' : (128, 128),                   # Grid size (integer)
     'cell_extent': 0.1,                         # Extent of a single cell. grid_extent equals to the product of grid_size and cell_extent
 
-    'num_jacobi_iter' : 100,                     # Number of iterations for pressure solving
+    'num_jacobi_iter' : 20,                     # Number of iterations for pressure solving
     'damped_jacobi_weight' : 1.0,               # Damping weighte in damped jacobi
 
     'particles_per_cell': 4,                    # Number of particles per cell
@@ -339,11 +339,20 @@ class Simulator(object):
         # Index on sides
         idx_side = [base-1, base, base+1, base+2]
         # Weight on sides
-        w_side = [self.quadratic_kernel(1.0+frac), self.quadratic_kernel(frac), self.quadratic_kernel(1.0-frac), self.quadratic_kernel(2.0-frac)]
+        w_side = [
+            self.quadratic_kernel(1.0+frac), 
+            self.quadratic_kernel(frac), 
+            self.quadratic_kernel(1.0-frac), 
+            self.quadratic_kernel(2.0-frac)
+        ]
         # Index on centers
         idx_center = [base-1, base, base+1]
         # Weight on centers
-        w_center = [self.quadratic_kernel(0.5+frac), self.quadratic_kernel(ti.abs(0.5-frac)), self.quadratic_kernel(1.5-frac)]
+        w_center = [
+            self.quadratic_kernel(0.5+frac), 
+            self.quadratic_kernel(ti.abs(0.5-frac)), 
+            self.quadratic_kernel(1.5-frac)
+        ]
 
         for i in ti.static(range(4)):
             for j in ti.static(range(3)):
