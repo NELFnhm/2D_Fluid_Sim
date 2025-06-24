@@ -11,11 +11,8 @@ if __name__ == "__main__":
 
     sim = Simulator() 
     # gui = SimulationGUI_2D(sim, window_resolution=WINDOW_RESOLUTION, save_output=True)
-    # gui = SimulationGUI_2D(sim, window_resolution=WINDOW_RESOLUTION)
+    gui = SimulationGUI_2D(sim, window_resolution=WINDOW_RESOLUTION)
     
-    # gui.run()
+    gui.run()
     
-    gui = SimulationGUI_2D(sim, window_resolution=WINDOW_RESOLUTION, save_output=True)
-    # gui.run2()
-    gui.run2(False)
     
